@@ -1,0 +1,78 @@
+import math
+
+a=[]
+b=[]
+
+def inicilizar_Matriz(fil,col):
+    
+  
+    mat= [None] * fil
+    
+    if(fil>0):
+        for i in range(fil):
+            mat[i] = [None] * col
+            
+    return mat
+
+def llenar_Matriz(fil,col):
+    
+    global a
+    global b
+    
+    a,b=inicilizar_Matriz(fil,col),inicilizar_Matriz(fil,0)
+    
+    i,j=0,0
+    strg=""
+    
+    while i<len(a):
+        while j<(len(a[i])):
+            strg+="a["+str(i)+"]["+str(j)+"] = "
+            a[i][j]=float(input(strg))
+            j+=1
+            strg=""
+            
+        b[i]=float(input("b["+str(i)+"]= "))
+        
+        j=0
+        i+=1
+    print(" ")
+    print(a)
+    
+def cal_Determinante(matriz):
+    
+    fil,col,det,i,j,x,z,c1=0,0,0,0,0,0,0,0
+    piv=-1
+    
+    if(len(matriz)==2):
+        cal_Determinante_men(matriz)
+    
+    if(len(matriz)>2):
+        menor=inicilizar_Matriz(len(matriz)-1,len(matriz)-1)
+        while col<len(matriz):
+            c1=matriz[fil][col]
+            while i<len(matriz):
+           
+                if(i!=fil):
+                    while j<len(matriz[i]):
+                        if j!=col:
+                            menor[x][z]=(matriz[i][j])
+                            z+=1
+                        j+=1
+                    z=0     
+                    x+=1
+                
+                j=0
+                i+=1 
+            x=0
+            i=0
+            
+            if(len(menor)==2):
+                det+=c1*(piv**(col))*cal_Determinante_men(menor)
+            else:
+                det+=c1*(piv**(col))*cal_Determinante(menor)
+            col+=1
+    
+    return det
+
+def cal_Determinante_men(menor): 
+    return ((menor[0][0]*menor[1][1])-(menor[0][1]*menor[1][0]))
